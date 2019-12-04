@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -20,7 +21,9 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
-
+# for i in room:
+    # print(room[i].description)
+# print(room)
 
 # Link rooms together
 
@@ -38,6 +41,10 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+
+player_name = input("What is your name? >> ")
+player1 = Player(player_name, 'outside')
+print(f'Welcome, {player1.name}. You are currently {player1.room}.')
 
 # Write a loop that:
 #
