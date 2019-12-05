@@ -59,15 +59,20 @@ print(f'Welcome, {player.name}.')
 current_room = 'Outside Cave Entrance'
 current_description = 'North of you, the cave mount beckons'
 while True:
-    print(f'Current room: {player.room}')
+    print(f'{player.room}')
     print(f'Description: {player.room.description}')
     move = input(">> ")
     try:
         if move == 'n':
-            current_room = room[player.room].n_to.name
-            current_description = room[player.room].n_to.description
+            player.room = player.room.n_to
         elif move == 's':
-            current_room = room[player.room].s_to.name
-            current_description = room[player.room].s_to.description
+            player.room = player.room.s_to
+        elif move == 'e':
+            player.room = player.room.e_to
+        elif move == 'w':
+            player.room = player.room.w_to
+        elif move == 'q':
+            print("Goodbye!")
+            break
     except:
-        print("Invalid direction, try another")
+        print("You run into a wall, try another direction")
