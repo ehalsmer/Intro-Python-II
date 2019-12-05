@@ -1,3 +1,4 @@
+import sys
 from room import Room
 from player import Player
 
@@ -62,18 +63,21 @@ while True:
     print(f'{player.room}')
     print(f'Description: {player.room.description}')
     print(f'Items visible: {player.room.items}')
-    move = input(">> ")
-    try:
-        if move == 'n':
-            player.room = player.room.n_to
-        elif move == 's':
-            player.room = player.room.s_to
-        elif move == 'e':
-            player.room = player.room.e_to
-        elif move == 'w':
-            player.room = player.room.w_to
-        elif move == 'q':
-            print("Goodbye!")
-            break
-    except:
-        print("You run into a wall, try another direction")
+    move = input(">> ").split(" ")
+    if len(move) == 1:
+        try:
+            if move[0] == 'n':
+                player.room = player.room.n_to
+            elif move[0] == 's':
+                player.room = player.room.s_to
+            elif move[0] == 'e':
+                player.room = player.room.e_to
+            elif move[0] == 'w':
+                player.room = player.room.w_to
+            elif move[0] == 'q':
+                print("Goodbye!")
+                break
+        except:
+            print("You run into a wall, try another direction")
+    elif len(move) == 2:
+        print("Hm! A verb and a noun?")
