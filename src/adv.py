@@ -1,6 +1,7 @@
 import sys
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -22,9 +23,6 @@ to north. The smell of gold permeates the air.""", ["lantern"]),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south.""", ["dust", "coin", "chest", "map"]),
 }
-# for i in room:
-    # print(room[i].description)
-# print(room)
 
 # Link rooms together
 
@@ -57,13 +55,12 @@ print(f'Welcome, {player.name}.')
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-current_room = 'Outside Cave Entrance'
-current_description = 'North of you, the cave mount beckons'
+# "i" prints player's inventory.
+
 while True:
     print(f'{player.room}')
     print(f'Description: {player.room.description}')
     print(f'Items in room: {player.room.items}')
-    print(f'Items on player: {player.items}')
     move = input(">> ").split(" ")
     if len(move) == 1:
         try:
@@ -75,6 +72,8 @@ while True:
                 player.room = player.room.e_to
             elif move[0] == 'w':
                 player.room = player.room.w_to
+            elif move[0] in ['i', 'inventory']:
+                print(f'Inventory: {player.items}')
             elif move[0] == 'q':
                 print("Goodbye!")
                 break
@@ -82,8 +81,18 @@ while True:
             print("You run into a wall, try another direction")
     elif len(move) == 2:
         if move[0] == 'get':
-            player.room.remove_item(move[1])
-            print(move[1])
-            player.add_item(move[1])
+            if move[1] in player.room.items:
+                player.room.remove_item(move[1])
+                Item(move[1]).on_take()
+                player.add_item(move[1])
+            else:
+                print(f"{move[1]} not found.")
+        elif move[0] == 'drop':
+            if move[1] in player.items:
+                player.remove_item(move[1])
+                Item(move[1]).on_drop()
+                player.room.add_item(move[1])
+            else:
+                print(f'{move[1]} not in inventory. Type "i" to check inventory.')
         else:
-            print("Try another command")
+            print("Unable to parse. Commands for items include: get, drop")
