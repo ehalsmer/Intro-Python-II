@@ -62,7 +62,8 @@ current_description = 'North of you, the cave mount beckons'
 while True:
     print(f'{player.room}')
     print(f'Description: {player.room.description}')
-    print(f'Items visible: {player.room.items}')
+    print(f'Items in room: {player.room.items}')
+    print(f'Items on player: {player.items}')
     move = input(">> ").split(" ")
     if len(move) == 1:
         try:
@@ -80,4 +81,9 @@ while True:
         except:
             print("You run into a wall, try another direction")
     elif len(move) == 2:
-        print("Hm! A verb and a noun?")
+        if move[0] == 'get':
+            player.room.remove_item(move[1])
+            print(move[1])
+            player.add_item(move[1])
+        else:
+            print("Try another command")

@@ -10,3 +10,7 @@ class Player:
         return f"Player: {self.name}"
     def __repr__(self):
         return f"Player({repr(self.name, self.room)})"
+    def add_item(self, item):
+        self.items.append(item)
+    def remove_item(self, item):
+        self.items.remove(item)
