@@ -43,8 +43,8 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 player_name = input("What is your name? >> ")
-player1 = Player(player_name, 'outside')
-print(f'Welcome, {player1.name}. You are currently {player1.room}.')
+player = Player(player_name, 'outside')
+print(f'Welcome, {player.name}.')
 
 # Write a loop that:
 #
@@ -56,3 +56,18 @@ print(f'Welcome, {player1.name}. You are currently {player1.room}.')
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+current_room = 'Outside Cave Entrance'
+current_description = 'North of you, the cave mount beckons'
+while True:
+    print(f'Current room: {current_room}')
+    print(f'Description: {current_description}')
+    move = input(">> ")
+    try:
+        if move == 'n':
+            current_room = room[player.room].n_to.name
+            current_description = room[player.room].n_to.description
+        elif move == 's':
+            current_room = room[player.room].s_to.name
+            current_description = room[player.room].s_to.description
+    except:
+        print("Invalid direction, try another")
