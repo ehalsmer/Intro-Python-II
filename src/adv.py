@@ -43,7 +43,7 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 player_name = input("What is your name? >> ")
-player = Player(player_name, 'outside')
+player = Player(player_name, room['outside'])
 print(f'Welcome, {player.name}.')
 
 # Write a loop that:
@@ -59,8 +59,8 @@ print(f'Welcome, {player.name}.')
 current_room = 'Outside Cave Entrance'
 current_description = 'North of you, the cave mount beckons'
 while True:
-    print(f'Current room: {current_room}')
-    print(f'Description: {current_description}')
+    print(f'Current room: {player.room}')
+    print(f'Description: {player.room.description}')
     move = input(">> ")
     try:
         if move == 'n':
