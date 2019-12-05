@@ -5,21 +5,21 @@ from player import Player
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", ["rock"]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", ["umbrella", "rug", "candle"]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", ["knife", "binoculars"]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", ["lantern"]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", ["dust", "coin", "chest", "map"]),
 }
 # for i in room:
     # print(room[i].description)
@@ -61,6 +61,7 @@ current_description = 'North of you, the cave mount beckons'
 while True:
     print(f'{player.room}')
     print(f'Description: {player.room.description}')
+    print(f'Items visible: {player.room.items}')
     move = input(">> ")
     try:
         if move == 'n':
